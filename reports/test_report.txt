@@ -1,0 +1,24 @@
+test_get_all_is_empty_at_start (test_memory_repository.InMemoryProductRepositoryTests.test_get_all_is_empty_at_start) ... ok
+test_get_all_returns_every_saved_product (test_memory_repository.InMemoryProductRepositoryTests.test_get_all_returns_every_saved_product) ... ok
+test_get_by_id_returns_none_when_missing (test_memory_repository.InMemoryProductRepositoryTests.test_get_by_id_returns_none_when_missing) ... ok
+test_get_by_id_returns_saved_product (test_memory_repository.InMemoryProductRepositoryTests.test_get_by_id_returns_saved_product) ... ok
+test_save_assigns_incremental_ids (test_memory_repository.InMemoryProductRepositoryTests.test_save_assigns_incremental_ids) ... ok
+test_creates_product_and_trims_name (test_product.ProductTests.test_creates_product_and_trims_name) ... ok
+test_rejects_empty_name (test_product.ProductTests.test_rejects_empty_name) ... ok
+test_rejects_non_positive_price (test_product.ProductTests.test_rejects_non_positive_price) ... ok
+test_creates_product_using_repository (test_product_service.ProductServiceTests.test_creates_product_using_repository) ... ok
+test_lists_products_from_repository (test_product_service.ProductServiceTests.test_lists_products_from_repository) ... ok
+test_raises_when_product_does_not_exist (test_product_service.ProductServiceTests.test_raises_when_product_does_not_exist) ... ok
+test_returns_product_from_repository (test_product_service.ProductServiceTests.test_returns_product_from_repository) ... ok
+test_create_and_get_product (test_web.ProductApiTests.test_create_and_get_product) ... ok
+test_lists_products (test_web.ProductApiTests.test_lists_products) ... ok
+test_rejects_missing_fields (test_web.ProductApiTests.test_rejects_missing_fields) ... ok
+test_rejects_non_numeric_price (test_web.ProductApiTests.test_rejects_non_numeric_price) ... ok
+test_rejects_non_string_name (test_web.ProductApiTests.test_rejects_non_string_name) ... ok
+test_rejects_product_with_invalid_price (test_web.ProductApiTests.test_rejects_product_with_invalid_price) ... ok
+test_returns_not_found_for_unknown_product (test_web.ProductApiTests.test_returns_not_found_for_unknown_product) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.020s
+
+OK

@@ -1,0 +1,9 @@
+Name                                               Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------------------
+src/catalogo/application/product_service.py           15      0   100%
+src/catalogo/domain/product.py                        11      0   100%
+src/catalogo/domain/repositories.py                    3      0   100%
+src/catalogo/infrastructure/memory_repository.py      15      0   100%
+src/catalogo/web/app.py                               33      1    97%   48
+--------------------------------------------------------------------------------
+TOTAL                                                 77      1    99%

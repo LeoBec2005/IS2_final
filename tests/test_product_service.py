@@ -35,3 +35,10 @@ class ProductServiceTests(unittest.TestCase):
 
         with self.assertRaises(LookupError):
             self.service.get_product(99)
+            
+    def test_lists_products_from_repository(self):
+        expected = [Product("Cafe", Decimal("3.50"), id=1)]
+        self.repository.get_all.return_value = expected
+
+        self.assertEqual(expected, self.service.list_products())
+        self.repository.get_all.assert_called_once_with()
