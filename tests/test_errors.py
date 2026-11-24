@@ -17,5 +17,7 @@ class DomainErrorsTests(unittest.TestCase):
         repository = Mock(spec=ProductRepository)
         repository.get_by_id.return_value = None
 
+        service = ProductService(repository)
+
         with self.assertRaises(ProductNotFoundError):
-            ProductService(repository).get_product(99)
+            service.get_product(99)
