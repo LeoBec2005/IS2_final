@@ -1,4 +1,3 @@
-from dataclasses import replace
 from threading import Lock
 
 from catalogo.domain.product import Product
@@ -12,7 +11,7 @@ class InMemoryProductRepository:
 
     def save(self, product: Product) -> Product:
         with self._lock:
-            saved_product = replace(product, id=self._next_id)
+            saved_product = Product(name=product.name, price=product.price, id=self._next_id)
             self._products[self._next_id] = saved_product
             self._next_id += 1
         return saved_product
