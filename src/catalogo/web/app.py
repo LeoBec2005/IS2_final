@@ -5,18 +5,16 @@ from catalogo.domain.errors import InvalidProductError, ProductNotFoundError
 from catalogo.domain.repositories import ProductRepository
 from catalogo.infrastructure.memory_repository import InMemoryProductRepository
 from catalogo.web.payloads import parse_product_payload
+from catalogo.web.serializers import product_to_dict
 
 
 def create_app(repository: ProductRepository | None = None) -> Flask:
     app = Flask(__name__)
     service = ProductService(repository or InMemoryProductRepository())
 
-    def serialize(product):
-        return {"id": product.id, "name": product.name, "price": str(product.price)}
-
     @app.get("/products")
     def list_products():
-        return jsonify([serialize(product) for product in service.list_products()])
+        return jsonify([product_to_dict(product) for product in service.list_products()])
 
     @app.post("/products")
     def create_product():
@@ -25,7 +23,7 @@ def create_app(repository: ProductRepository | None = None) -> Flask:
             product = service.create_product(name, price)
         except InvalidProductError as error:
             return jsonify({"error": str(error)}), 400
-        return jsonify(serialize(product)), 201
+        return jsonify(product_to_dict(product)), 201
 
     @app.get("/products/<int:product_id>")
     def get_product(product_id: int):
@@ -33,7 +31,7 @@ def create_app(repository: ProductRepository | None = None) -> Flask:
             product = service.get_product(product_id)
         except ProductNotFoundError as error:
             return jsonify({"error": str(error)}), 404
-        return jsonify(serialize(product))
+        return jsonify(product_to_dict(product))
 
     return app
 
