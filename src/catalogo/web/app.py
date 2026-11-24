@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify, request
 
 from catalogo.application.product_service import ProductService
@@ -37,4 +39,4 @@ def create_app(repository: ProductRepository | None = None) -> Flask:
 
 
 if __name__ == "__main__":
-    create_app().run(debug=True)
+    create_app().run(debug=os.environ.get("FLASK_DEBUG") == "1")
