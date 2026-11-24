@@ -8,8 +8,8 @@ class ProductTests(unittest.TestCase):
     def test_creates_product_and_trims_name(self):
         product = Product("  Cafe  ", Decimal("3.50"))
 
-        self.assertEqual("Cafe", product.name)
-        self.assertEqual(Decimal("3.50"), product.price)
+        self.assertEqual(product.name, "Cafe")
+        self.assertEqual(product.price, Decimal("3.50"))
 
     def test_rejects_empty_name(self):
         with self.assertRaises(ValueError):

@@ -23,4 +23,4 @@ class InMemoryProductRepositoryTests(unittest.TestCase):
         finally:
             sys.setswitchinterval(previous)
 
-        self.assertEqual(2000, len({product.id for product in saved}))
+        self.assertEqual(len({product.id for product in saved}), 2000)

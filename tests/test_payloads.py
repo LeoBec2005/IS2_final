@@ -8,8 +8,8 @@ from catalogo.web.payloads import parse_product_payload
 class PayloadTests(unittest.TestCase):
     def test_parses_valid_payload(self):
         self.assertEqual(
-            ("Cafe", Decimal("3.50")),
             parse_product_payload({"name": "Cafe", "price": "3.50"}),
+            ("Cafe", Decimal("3.50")),
         )
 
     def test_rejects_missing_price(self):

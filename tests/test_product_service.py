@@ -18,7 +18,7 @@ class ProductServiceTests(unittest.TestCase):
 
         result = self.service.create_product("Cafe", Decimal("3.50"))
 
-        self.assertEqual(expected, result)
+        self.assertEqual(result, expected)
         self.repository.save.assert_called_once_with(Product("Cafe", Decimal("3.50")))
 
     def test_returns_product_from_repository(self):
@@ -27,7 +27,7 @@ class ProductServiceTests(unittest.TestCase):
 
         result = self.service.get_product(1)
 
-        self.assertEqual(expected, result)
+        self.assertEqual(result, expected)
         self.repository.get_by_id.assert_called_once_with(1)
 
     def test_raises_when_product_does_not_exist(self):
@@ -40,5 +40,5 @@ class ProductServiceTests(unittest.TestCase):
         expected = [Product("Cafe", Decimal("3.50"), id=1)]
         self.repository.get_all.return_value = expected
 
-        self.assertEqual(expected, self.service.list_products())
+        self.assertEqual(self.service.list_products(), expected)
         self.repository.get_all.assert_called_once_with()
