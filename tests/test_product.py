@@ -12,8 +12,10 @@ class ProductTests(unittest.TestCase):
         self.assertEqual(product.price, Decimal("3.50"))
 
     def test_rejects_empty_name(self):
+        price = Decimal("3.50")
+
         with self.assertRaises(ValueError):
-            Product("  ", Decimal("3.50"))
+            Product("  ", price)
 
     def test_rejects_non_positive_price(self):
         for price in (Decimal("0"), Decimal("-1")):

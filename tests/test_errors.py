@@ -10,8 +10,10 @@ from catalogo.domain.repositories import ProductRepository
 
 class DomainErrorsTests(unittest.TestCase):
     def test_invalid_price_raises_invalid_product_error(self):
+        price = Decimal("0")
+
         with self.assertRaises(InvalidProductError):
-            Product("Cafe", Decimal("0"))
+            Product("Cafe", price)
 
     def test_unknown_product_raises_not_found_error(self):
         repository = Mock(spec=ProductRepository)
