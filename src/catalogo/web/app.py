@@ -1,10 +1,10 @@
-from decimal import Decimal, InvalidOperation
-
 from flask import Flask, jsonify, request
 
 from catalogo.application.product_service import ProductService
+from catalogo.domain.errors import InvalidProductError, ProductNotFoundError
 from catalogo.domain.repositories import ProductRepository
 from catalogo.infrastructure.memory_repository import InMemoryProductRepository
+from catalogo.web.payloads import parse_product_payload
 
 
 def create_app(repository: ProductRepository | None = None) -> Flask:
@@ -20,16 +20,10 @@ def create_app(repository: ProductRepository | None = None) -> Flask:
 
     @app.post("/products")
     def create_product():
-        data = request.get_json(silent=True)
-        if (
-            not isinstance(data, dict)
-            or not isinstance(data.get("name"), str)
-            or "price" not in data
-        ):
-            return jsonify({"error": "Se requieren name y price."}), 400
         try:
-            product = service.create_product(data["name"], Decimal(str(data["price"])))
-        except (InvalidOperation, TypeError, ValueError) as error:
+            name, price = parse_product_payload(request.get_json(silent=True))
+            product = service.create_product(name, price)
+        except InvalidProductError as error:
             return jsonify({"error": str(error)}), 400
         return jsonify(serialize(product)), 201
 
@@ -37,7 +31,7 @@ def create_app(repository: ProductRepository | None = None) -> Flask:
     def get_product(product_id: int):
         try:
             product = service.get_product(product_id)
-        except LookupError as error:
+        except ProductNotFoundError as error:
             return jsonify({"error": str(error)}), 404
         return jsonify(serialize(product))
 
