@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from decimal import Decimal
 
+from catalogo.domain.errors import InvalidProductError
+
 
 @dataclass(frozen=True)
 class Product:
@@ -10,7 +12,7 @@ class Product:
 
     def __post_init__(self) -> None:
         if not self.name or not self.name.strip():
-            raise ValueError("El nombre del producto no puede estar vacio.")
+            raise InvalidProductError("El nombre del producto no puede estar vacio.")
         if not self.price.is_finite() or self.price <= 0:
-            raise ValueError("El precio debe ser un numero positivo.")
+            raise InvalidProductError("El precio debe ser un numero positivo.")
         object.__setattr__(self, "name", self.name.strip())

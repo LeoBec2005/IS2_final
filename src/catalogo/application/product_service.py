@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from catalogo.domain.errors import ProductNotFoundError
 from catalogo.domain.product import Product
 from catalogo.domain.repositories import ProductRepository
 
@@ -14,7 +15,7 @@ class ProductService:
     def get_product(self, product_id: int) -> Product:
         product = self._repository.get_by_id(product_id)
         if product is None:
-            raise LookupError("Producto no encontrado.")
+            raise ProductNotFoundError("Producto no encontrado.")
         return product
 
     def list_products(self) -> list[Product]:
